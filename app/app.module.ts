@@ -10,11 +10,13 @@ import {FlightDetailsComponent} from "./flights/flight-details/flight-details.cm
 import {Router, RouterModule, Routes} from "@angular/router";
 import {appRoutes, RouteComponent} from "./routes";
 import {CreateFlightComponent} from "./flights/create-flight.component";
+import {PageNotFoundComponent} from "./errors/page-not-found.component";
+import {FlightRouteActivator} from "./flights/flight-details/flight-routeactivator.service";
 
 @NgModule({
     imports: [BrowserModule, RouterModule.forRoot(appRoutes, { enableTracing: true})],
-    declarations: [NavBarComponent, FlightsAppComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent],
-    providers: [FlightService, ToastrService],
+    declarations: [NavBarComponent, FlightsAppComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent, PageNotFoundComponent],
+    providers: [FlightService, ToastrService, FlightRouteActivator],
     bootstrap: [FlightsAppComponent]
 })
 export class AppModule {
