@@ -1,11 +1,16 @@
 import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/RX";
 
 @Injectable()
 export class FlightService {
 
     getFlights() {
-        return FLIGHTS;
+        let subject = new Subject()
+        setTimeout(()=> {subject.next(FLIGHTS); subject.complete();},2000)
+        return subject;
     }
+
+
 
     getFlight(id:number){
         return FLIGHTS.find(flight => flight.id === id);

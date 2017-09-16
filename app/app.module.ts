@@ -12,15 +12,32 @@ import {appRoutes, RouteComponent} from "./routes";
 import {CreateFlightComponent} from "./flights/create-flight.component";
 import {PageNotFoundComponent} from "./errors/page-not-found.component";
 import {FlightRouteActivator} from "./flights/flight-details/flight-routeactivator.service";
+import {FlightListResolver} from "./flights/shared/flights-list.resolver";
 
 @NgModule({
-    imports: [BrowserModule, RouterModule.forRoot(appRoutes, { enableTracing: true})],
+    imports: [BrowserModule, RouterModule.forRoot(appRoutes, { enableTracing: true, useHash: true})],
     declarations: [NavBarComponent, FlightsAppComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent, PageNotFoundComponent],
-    providers: [FlightService, ToastrService, FlightRouteActivator],
+    providers: [FlightService,
+        ToastrService,
+        FlightRouteActivator,
+        FlightsListComponent,
+        FlightListResolver,
+        {
+            provide: 'canDeactivateCreateFlight',
+            useValue: checkDirtyState
+        }
+    ],
     bootstrap: [FlightsAppComponent]
 })
 export class AppModule {
     constructor(router: Router) {
         console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
     }
+}
+
+function checkDirtyState(component:CreateFlightComponent){
+    if(component.isDirty){
+        return window.confirm('You havent saved the flight data? Are you sure you want to navigate away from this page?');
+    }
+    return true;
 }

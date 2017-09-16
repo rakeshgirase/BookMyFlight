@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FlightService} from "./shared/flight.service";
 import {ToastrService} from "../common/toastr.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     template: `
@@ -20,12 +20,14 @@ import {Router} from "@angular/router";
     `
 })
 export class FlightsListComponent implements OnInit{
-    flights: any[]
-    constructor(private flightService: FlightService, private toastrService: ToastrService) {
+    flights: any
+    constructor(private flightService: FlightService, private toastrService: ToastrService, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.flights = this.flightService.getFlights();
+        //Uncomment this when you are not using routing for getting the flights from FlightListRouter
+        //this.flightService.getFlights().subscribe(flights=> this.flights = flights);
+        this.flights = this.route.snapshot.data['flights'];
     }
 
     handleBookRequest(flightName) {

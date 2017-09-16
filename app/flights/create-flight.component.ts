@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
     `
 })
 export class CreateFlightComponent {
+    isDirty:Boolean = true;
     constructor(private router: Router){
 
     }

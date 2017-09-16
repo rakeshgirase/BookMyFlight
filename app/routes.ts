@@ -5,10 +5,11 @@ import {Component} from "@angular/core";
 import {CreateFlightComponent} from "./flights/create-flight.component";
 import {PageNotFoundComponent} from "./errors/page-not-found.component";
 import {FlightRouteActivator} from "./flights/flight-details/flight-routeactivator.service";
+import {FlightListResolver} from "./flights/shared/flights-list.resolver";
 
 export const appRoutes: Routes = [
-    {path: 'flights/new', component: CreateFlightComponent},
-    {path: 'flights', component: FlightsListComponent},
+    {path: 'flights/new', component: CreateFlightComponent, canDeactivate: ['canDeactivateCreateFlight']},
+    {path: 'flights', component: FlightsListComponent, resolve: {flights: FlightListResolver}},
     {path: 'flights/:id', component: FlightDetailsComponent, canActivate: [FlightRouteActivator]},
     {path: '404', component: PageNotFoundComponent},
     {path: '', redirectTo: 'flights', pathMatch: 'full'}
