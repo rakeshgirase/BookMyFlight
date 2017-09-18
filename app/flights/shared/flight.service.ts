@@ -1,46 +1,56 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs/RX";
+import {IFlight} from "./flight.module";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class FlightService {
 
-    getFlights() {
-        let subject = new Subject()
-        setTimeout(()=> {subject.next(FLIGHTS); subject.complete();},2000)
+    getFlights():Observable<IFlight[]> {
+        let subject = new Subject<IFlight[]>()
+        setTimeout(()=> {subject.next(FLIGHTS); subject.complete();},100)
         return subject;
     }
 
 
 
-    getFlight(id:number){
+    getFlight(id:number): IFlight{
         return FLIGHTS.find(flight => flight.id === id);
+    }
+
+    saveFlight(flight: IFlight) {
+        flight.id=999
+        FLIGHTS.push(flight)
     }
 }
 
-const FLIGHTS = [{
+const FLIGHTS:IFlight[] = [{
     id: 1,
     name: 'Air India',
-    date: '15-Sep-2017',
+    date: new Date('15-Sep-2017'),
     time: '10 AM',
     from: 'BOM',
     to: 'GLA',
-    price: '500 USD',
+    price: 500,
     imageUrl: '/app/asset/images/angularconnect-shield.png',
+    onlineUrl: '/app/asset/images/angularconnect-shield.png',
     location: {
         address: '1057 DT',
         city: 'Glasgow',
         country: 'Scotland'
-    }
+    },
+    sessions: []
 },
     {
         id: 2,
         name: 'Virgin Atlantic',
-        date: '16-Sep-2017',
+        date: new Date('16-Sep-2017'),
         time: '10 AM',
         from: 'LON',
         to: 'BOM',
-        price: '1500 USD',
+        price: 1500,
         imageUrl: '/app/asset/images/angularconnect-shield.png',
+        onlineUrl: '/app/asset/images/angularconnect-shield.png',
         location: {
             address: '1057 DT',
             city: 'London',
@@ -50,12 +60,13 @@ const FLIGHTS = [{
     {
         id: 3,
         name: 'Air France',
-        date: '17-Sep-2017',
+        date: new Date('17-Sep-2017'),
         time: '10 AM',
         from: 'PAR',
         to: 'LON',
-        price: '300 USD',
+        price: 300,
         imageUrl: '/app/asset/images/angularconnect-shield.png',
+        onlineUrl: '/app/asset/images/angularconnect-shield.png',
         location: {
             address: '1057 DT',
             city: 'Paris',
@@ -65,12 +76,13 @@ const FLIGHTS = [{
     {
         id: 4,
         name: 'Kingfisher',
-        date: '19-Sep-2017',
+        date: new Date('19-Sep-2017'),
         time: '12 AM',
         from: 'BOM',
         to: 'BLR',
-        price: '100 USD',
+        price: 100,
         imageUrl: '/app/asset/images/angularconnect-shield.png',
+        onlineUrl: '/app/asset/images/angularconnect-shield.png',
         location: {
             address: '1057 DT',
             city: 'Banglore',

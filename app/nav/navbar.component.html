@@ -7,12 +7,12 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a [routerLink] = "['/flights']">All Flights</a>
+                    <a [routerLink] = "['/flights']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">All Flights</a>
                 </li>
-                <li><a [routerLink] = "['/flights/new']">Create Flight</a></li>
+                <li><a [routerLink] = "['/flights/new']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Create Flight</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-                        Events
+                        Flights
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -25,7 +25,8 @@
             <div class="navbar-header navbar-right">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a>Welcome Avatar</a>
+                        <a *ngIf="!authService.isAuthenticated()" [routerLink]="['user/login']" routerLinkActive="active">Login</a>
+                        <a *ngIf="authService.isAuthenticated()" [routerLink]="['user/profile']" routerLinkActive="active">Welcome {{authService.currentUser.firstName}}</a>
                     </li>
                 </ul>
             </div>

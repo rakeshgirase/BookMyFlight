@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {FlightService} from "./shared/flight.service";
 import {ToastrService} from "../common/toastr.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {IFlight} from "./shared/flight.module";
 
 @Component({
     template: `
@@ -20,8 +21,8 @@ import {ActivatedRoute, Router} from "@angular/router";
     `
 })
 export class FlightsListComponent implements OnInit{
-    flights: any
-    constructor(private flightService: FlightService, private toastrService: ToastrService, private route: ActivatedRoute) {
+    flights: IFlight[]
+    constructor(private toastrService: ToastrService, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
