@@ -6,43 +6,43 @@
              [ngClass]="{'error': newFlightForm.controls.name?.invalid && newFlightForm.controls.name?.touched}">
             <label for="flightName">Flight Name:</label>
             <em *ngIf="newFlightForm.controls.name?.invalid && (newFlightForm.controls.name?.touched)">Required</em>
-            <input (ngModel)="name" name="name" required id="name" type="text" class="form-control"
+            <input [(ngModel)]="flight.name" name="name" required id="name" type="text" class="form-control"
                    placeholder="Name of your flight..."/>
         </div>
         <div class="form-group"
              [ngClass]="{'error': newFlightForm.controls.date?.invalid && newFlightForm.controls.date?.touched}">
             <label for="flightDate">Flight Date:</label>
             <em *ngIf="newFlightForm.controls.date?.invalid && (newFlightForm.controls.date?.touched)">Required</em>
-            <input (ngModel)="date" name="date" required id="flightDate" type="text" class="form-control"
+            <input [(ngModel)]="flight.date" name="date" required id="flightDate" type="text" class="form-control"
                    placeholder="format (mm/dd/yyyy)..."/>
         </div>
         <div class="form-group"
              [ngClass]="{'error': newFlightForm.controls.time?.invalid && newFlightForm.controls.time?.touched}">
             <label for="flightTime">Flight Time:</label>
             <em *ngIf="newFlightForm.controls.time?.invalid && (newFlightForm.controls.time?.touched)">Required</em>
-            <input (ngModel)="time" name="time" required id="flightTime" type="text" class="form-control"
+            <input [(ngModel)]="flight.time" name="time" required id="flightTime" type="text" class="form-control"
                    placeholder="start and end time..."/>
         </div>
         <div class="form-group"
              [ngClass]="{'error': newFlightForm.controls.price?.invalid && newFlightForm.controls.price?.touched}">
             <label for="flightPrice">Flight Price:</label>
             <em *ngIf="newFlightForm.controls.price?.invalid && (newFlightForm.controls.price?.touched)">Required</em>
-            <input (ngModel)="price" name="price" required id="flightPrice" type="text" type="number"
+            <input [(ngModel)]="flight.price" name="price" required id="flightPrice" type="text" type="text"
                    class="form-control" placeholder="flight price..."/>
         </div>
 
         <div ngModelGroup="location">
             <div class="form-group">
                 <label for="address">Flight Location:</label>
-                <input (ngModel)="address" name="address" id="address" type="text" class="form-control"
+                <input [(ngModel)]="flight.location.address" name="address" id="address" type="text" class="form-control"
                        placeholder="Address of flight..."/>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input (ngModel)="city" name="city" id="city" type="text" class="form-control" placeholder="City..."/>
+                    <input [(ngModel)]="flight.location.city" name="city" id="city" type="text" class="form-control" placeholder="City..."/>
                 </div>
                 <div class="col-md-6">
-                    <input (ngModel)="country" name="country" id="country" type="text" class="form-control"
+                    <input [(ngModel)]="flight.location.country" name="country" id="country" type="text" class="form-control"
                            placeholder="Country..."/>
                 </div>
             </div>
@@ -50,7 +50,7 @@
 
         <div class="form-group">
             <label for="onlineUrl">Online Url:</label>
-            <input (ngModel)="onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control"
+            <input [(ngModel)]="flight.onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control"
                    placeholder="Online Url..."/>
         </div>
         <div class="form-group"
@@ -59,7 +59,7 @@
             <em *ngIf="newFlightForm.controls.imageUrl?.invalid && newFlightForm.controls.imageUrl?.touched && newFlightForm.controls.imageUrl?.errors.required">Required</em>
             <em *ngIf="newFlightForm.controls.imageUrl?.invalid && newFlightForm.controls.imageUrl?.touched  && newFlightForm.controls.imageUrl?.errors.pattern">Must
                 be a png or jpg url</em>
-            <input (ngModel)="imageUrl" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text"
+            <input [(ngModel)]="flight.imageUrl" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text"
                    class="form-control" placeholder="url of image..."/>
             <img [src]="newFlightForm.controls.imageUrl.value" *ngIf="newFlightForm.controls.imageUrl?.valid"/>
         </div>

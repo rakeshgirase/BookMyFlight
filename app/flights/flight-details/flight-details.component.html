@@ -11,12 +11,12 @@
         <div class="col-md-6">
             <div><strong>Date:</strong> {{flight?.date}}</div>
             <div><strong>Time:</strong> {{flight?.time}}</div>
-            <div><strong>Price:</strong> ${{flight?.price}}</div>
+            <div><strong>Price:</strong> {{flight?.price|currency}}</div>
         </div>
         <div class="col-md-6">
             <address>
-                <strong>Address:</strong><br />
-                {{flight?.location?.address}}<br />
+                <strong>Address:</strong><br/>
+                {{flight?.location?.address}}<br/>
                 {{flight?.location?.city}}, {{flight?.location?.country}}
             </address>
         </div>

@@ -8,14 +8,21 @@ import {
     FlightRouteActivator,
     FlightListResolver
 } from './flights/index'
+import{
+    BaseWishComponent
+} from './wishes/index'
+
+import {CreateSessionComponent} from "./flights/flight-details/create-session.component";
 
 export const appRoutes: Routes = [
     {path: 'flights/new', component: CreateFlightComponent, canDeactivate: ['canDeactivateCreateFlight']},
     {path: 'flights', component: FlightsListComponent, resolve: {flights: FlightListResolver}},
     {path: 'flights/:id', component: FlightDetailsComponent, canActivate: [FlightRouteActivator]},
+    {path: 'flights/session/new', component: CreateSessionComponent},
     {path: '404', component: PageNotFoundComponent},
     {path: '', redirectTo: 'flights', pathMatch: 'full'},
-    {path: 'user', loadChildren: 'app/user/user.module#UserModule'}
+    {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
+    {path: 'wishes', component: BaseWishComponent}
 ]
 
 @Component({

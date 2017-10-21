@@ -9,7 +9,7 @@ import {ActivatedRoute} from "@angular/router";
         `
     ]
 })
-export class FlightDetailsComponent{
+export class FlightDetailsComponent implements OnInit{
     flight: any
 
     constructor(private flightService: FlightService, private route: ActivatedRoute) {

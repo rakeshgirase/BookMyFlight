@@ -1,5 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs/RX";
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import {IFlight} from "./flight.module";
 import {Observable} from "rxjs/Observable";
 
@@ -12,10 +15,9 @@ export class FlightService {
         return subject;
     }
 
-
-
     getFlight(id:number): IFlight{
-        return FLIGHTS.find(flight => flight.id === id);
+        return FLIGHTS.filter(flight => flight.id === id).pop();
+        //return new IFlight();
     }
 
     saveFlight(flight: IFlight) {
@@ -32,8 +34,8 @@ const FLIGHTS:IFlight[] = [{
     from: 'BOM',
     to: 'GLA',
     price: 500,
-    imageUrl: '/app/asset/images/angularconnect-shield.png',
-    onlineUrl: '/app/asset/images/angularconnect-shield.png',
+    imageUrl: '/app/assets/images/angularconnect-shield.png',
+    onlineUrl: '/app/assets/images/angularconnect-shield.png',
     location: {
         address: '1057 DT',
         city: 'Glasgow',
@@ -49,8 +51,8 @@ const FLIGHTS:IFlight[] = [{
         from: 'LON',
         to: 'BOM',
         price: 1500,
-        imageUrl: '/app/asset/images/angularconnect-shield.png',
-        onlineUrl: '/app/asset/images/angularconnect-shield.png',
+        imageUrl: '/app/assets/images/basic-shield.png',
+        onlineUrl: '/app/assets/images/basic-shield.png',
         location: {
             address: '1057 DT',
             city: 'London',
@@ -65,8 +67,8 @@ const FLIGHTS:IFlight[] = [{
         from: 'PAR',
         to: 'LON',
         price: 300,
-        imageUrl: '/app/asset/images/angularconnect-shield.png',
-        onlineUrl: '/app/asset/images/angularconnect-shield.png',
+        imageUrl: '/app/assets/images/ng-conf.png',
+        onlineUrl: '/app/assets/images/ng-conf.png',
         location: {
             address: '1057 DT',
             city: 'Paris',
@@ -81,8 +83,8 @@ const FLIGHTS:IFlight[] = [{
         from: 'BOM',
         to: 'BLR',
         price: 100,
-        imageUrl: '/app/asset/images/angularconnect-shield.png',
-        onlineUrl: '/app/asset/images/angularconnect-shield.png',
+        imageUrl: '/app/assets/images/ng-nl.png',
+        onlineUrl: '/app/assets/images/ng-nl.png',
         location: {
             address: '1057 DT',
             city: 'Banglore',

@@ -17,13 +17,15 @@ import{
 } from './flights/index';
 import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CreateSessionComponent} from "./flights/flight-details/create-session.component";
+import {BaseWishComponent} from "./wishes/base-wish.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes, {
         enableTracing: false,
         useHash: true
     })],
-    declarations: [NavBarComponent, FlightsAppComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent, PageNotFoundComponent],
+    declarations: [NavBarComponent, FlightsAppComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent, PageNotFoundComponent, CreateSessionComponent, BaseWishComponent],
     providers: [FlightService,
         ToastrService,
         FlightRouteActivator,
