@@ -39,3 +39,10 @@ button {
 
 .red {color: #c8171d !important;}
 .bold {font-weight: bold;}
+
+.profile-pic{
+    border-radius: 50%;
+    background-size: 16px 16px;
+    width: 35px;
+    height: 35px;
+}

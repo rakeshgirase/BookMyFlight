@@ -1,8 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {FlightService} from "./shared/flight.service";
-import {ToastrService} from "../common/toastr.service";
+import {Component, OnInit, Inject} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IFlight} from "./shared/flight.module";
+import {Toastr, TOASTR_TOKEN} from "../common/toastr.service";
 
 @Component({
     template: `
@@ -22,7 +21,7 @@ import {IFlight} from "./shared/flight.module";
 })
 export class FlightsListComponent implements OnInit{
     flights: IFlight[]
-    constructor(private toastrService: ToastrService, private route: ActivatedRoute) {
+    constructor(@Inject(TOASTR_TOKEN) private toastr: Toastr, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
@@ -32,7 +31,7 @@ export class FlightsListComponent implements OnInit{
     }
 
     handleBookRequest(flightName) {
-        this.toastrService.success(flightName);
+        this.toastr.success(flightName);
         //window.location.href = "/flights/1";
     }
 }

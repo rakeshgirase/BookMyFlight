@@ -11,7 +11,9 @@ export class AuthService{
             id:1,
             userName:userName,
             firstName:'Monica',
-            lastName:'Girase'
+            lastName:'Girase',
+            //picUrl: '/app/assets/images/angularconnect-shield.png'
+            picUrl: 'https://lh4.googleusercontent.com/-_t-6M1IVX0o/AAAAAAAAAAI/AAAAAAAA2X0/6IlQ7PVKY1U/s96-c/photo.jpg'
         }
     }
 
@@ -22,5 +24,9 @@ export class AuthService{
     updateCurrentUser(firstName: string, lastName: string) {
         this.currentUser.firstName = firstName;
         this.currentUser.lastName = lastName;
+    }
+
+    setCurrentUser(currentUser: IUser){
+        this.currentUser = currentUser
     }
 }

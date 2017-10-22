@@ -19,6 +19,7 @@
     "@angular/platform-browser": "4.4.6",
     "@angular/platform-browser-dynamic": "4.4.6",
     "@angular/router": "4.4.6",
+    "@types/gapi.auth2": "0.0.45",
     "core-js": "^2.5.1",
     "express-session": "^1.15.6",
     "ng2f-bootstrap": "^0.0.4",

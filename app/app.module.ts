@@ -3,7 +3,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {FlightsAppComponent} from "./flights-app.component";
 import {FlightThumbnailComponent} from "./flights/flight-thumbnail.component";
 import {NavBarComponent} from "./nav/navbar.component";
-import {ToastrService} from "./common/toastr.service";
+import {Toastr, TOASTR_TOKEN} from "./common/toastr.service";
 import {Router, RouterModule, Routes} from "@angular/router";
 import {appRoutes, RouteComponent} from "./routes";
 import {PageNotFoundComponent} from "./errors/page-not-found.component";
@@ -20,6 +20,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CreateSessionComponent} from "./flights/flight-details/create-session.component";
 import {BaseWishComponent} from "./wishes/base-wish.component";
 
+declare let toastr: Toastr;
+
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes, {
         enableTracing: false,
@@ -27,7 +29,7 @@ import {BaseWishComponent} from "./wishes/base-wish.component";
     })],
     declarations: [NavBarComponent, FlightsAppComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent, PageNotFoundComponent, CreateSessionComponent, BaseWishComponent],
     providers: [FlightService,
-        ToastrService,
+        {provide: TOASTR_TOKEN, useValue: toastr},
         FlightRouteActivator,
         FlightsListComponent,
         FlightListResolver,

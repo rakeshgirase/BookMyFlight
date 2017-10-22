@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<body class="container">
+<flights-app></flights-app>
+</body>
+
 <head>
     <title>Book My Flight</title>
     <base href="/"/>
@@ -20,6 +24,9 @@
     <script src="node_modules/toastr/build/toastr.min.js"></script>
     <!--D3 Library-->
     <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!--Google Api Authentication-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="systemjs.config.js"></script>
     <script>
         System.import('app').catch(function (err) {
@@ -27,8 +34,4 @@
         });
     </script>
 </head>
-
-<body class="container">
-<flights-app></flights-app>
-</body>
 </html>

@@ -1,8 +1,4 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {AuthService} from "./auth.service";
-import {GoogleAuthComponent} from "./google-auth.component";
-import {IUser} from "./user";
+import {AfterViewInit, Component, OnInit} from "@angular/core";
 
 @Component({
     templateUrl: 'app/user/login.component.html',
@@ -10,35 +6,26 @@ import {IUser} from "./user";
         em {float:right; color:#E05C65; padding-left:10px;}
     `]
 })
-export class LoginComponent implements OnInit{
-    private id: string = 'google-signin2';
-    private _width: any = 250;
-    private _height: any = 50;
-    private _longTitle: any = 'Hi';
-    private theme: any = 'None';
-    private scope: string = 'profile email';
+export class GoogleAuthComponent implements OnInit{
     ngOnInit(): void {
         gapi.load('auth2', () => {
             gapi.auth2.init({
                 client_id: '274248048538-68s2da9kub9t30p6s7r2ph560slovbbh.apps.googleusercontent.com',
                 scope: this.scope
             });
+            //this.attachSignin(document.getElementById('googleBtn2'));
         });
-    }
-
-    constructor(private authService:AuthService, private router:Router, private googleAuth:GoogleAuthComponent){
 
     }
-    login(formValues){
-        this.authService.loginUser(formValues.userName, formValues.password)
-        this.router.navigate(['flights'])
-    }
+    auth2: any;
+    private id: string = 'google-signin2';
+    private scope: string = 'profile email';
+    private _width: any = 250;
+    private _height: any = 50;
+    private _longTitle: any = 'Hi';
+    private theme: any = 'None';
 
-    cancel(){
-        this.router.navigate(['flights'])
-    }
-
-    googleInit(){
+    public googleInit() {
         gapi.signin2.render(
             this.id, {
                 scope: this.scope,
@@ -52,26 +39,33 @@ export class LoginComponent implements OnInit{
     }
 
     public handleSuccess(googleUser){
+        alert('Got GoogleUser Auth');
         let profile = googleUser.getBasicProfile();
         console.log('Token || ' + googleUser.getAuthResponse().id_token);
         console.log('ID: ' + profile.getId());
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail());
-        var currentUser:IUser;
-        currentUser = {
-            id:1,
-            userName:profile.getEmail(),
-            firstName:profile.getGivenName(),
-            lastName:profile.getFamilyName(),
-            picUrl: profile.getImageUrl()
-        }
-        this.authService.setCurrentUser(currentUser);
-        this.router.navigate(['flights'])
     }
 
     public handleFailure(){
         console.log("Failed Authentication")
-        this.authService.currentUser = null;
     }
+
+    /*public attachSignin(element) {
+        gapi.signin2.render()
+        auth2.attachClickHandler(element, {},
+            (googleUser) => {
+
+                let profile = googleUser.getBasicProfile();
+                console.log('Token || ' + googleUser.getAuthResponse().id_token);
+                console.log('ID: ' + profile.getId());
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail());
+                //YOUR CODE HERE
+            }, (error) => {
+                alert(JSON.stringify(error, undefined, 2));
+            });
+    }*/
 }

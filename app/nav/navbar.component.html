@@ -25,8 +25,11 @@
             <div class="navbar-header navbar-right">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a *ngIf="!authService.isAuthenticated()" [routerLink]="['user/login']" routerLinkActive="active">Login</a>
-                        <a *ngIf="authService.isAuthenticated()" [routerLink]="['user/profile']" routerLinkActive="active">Welcome {{authService.currentUser.firstName}}</a>
+                        <a *ngIf="!authService.isAuthenticated()" [routerLink]="['user/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Login</a>
+                        <div *ngIf="authService.isAuthenticated()">
+                            <a [routerLink]="['user/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Welcome {{authService.currentUser.firstName}}</a>
+                            <img [src]="authService.currentUser?.picUrl" [title]="authService.currentUser.firstName" class="profile-pic"/>
+                        </div>
                     </li>
                 </ul>
             </div>
