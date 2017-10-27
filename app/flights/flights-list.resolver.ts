@@ -9,7 +9,7 @@ export class FlightListResolver implements Resolve<any> {
     }
 
     resolve() {
-        return this.flightService.getFlights().map(flights => flights);
+        return this.flightService.getFlights();
     }
 
 }

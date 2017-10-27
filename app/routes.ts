@@ -13,11 +13,10 @@ import{
 } from './wishes/index'
 
 import {CreateSessionComponent} from "./flights/flight-details/create-session.component";
-import {GoogleAuthComponent} from "./user/google-auth.component";
 
 export const appRoutes: Routes = [
     {path: 'flights/new', component: CreateFlightComponent, canDeactivate: ['canDeactivateCreateFlight']},
-    {path: 'flights', component: FlightsListComponent, resolve: {flights: FlightListResolver}},
+    {path: 'flights', component: FlightsListComponent},
     {path: 'flights/:id', component: FlightDetailsComponent, canActivate: [FlightRouteActivator]},
     {path: 'flights/session/new', component: CreateSessionComponent},
     {path: '404', component: PageNotFoundComponent},

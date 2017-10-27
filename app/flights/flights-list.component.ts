@@ -2,6 +2,7 @@ import {Component, OnInit, Inject} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IFlight} from "./shared/flight.module";
 import {Toastr, TOASTR_TOKEN} from "../common/toastr.service";
+import {FlightService} from "./shared/flight.service";
 
 @Component({
     template: `
@@ -21,13 +22,15 @@ import {Toastr, TOASTR_TOKEN} from "../common/toastr.service";
 })
 export class FlightsListComponent implements OnInit{
     flights: IFlight[]
-    constructor(@Inject(TOASTR_TOKEN) private toastr: Toastr, private route: ActivatedRoute) {
+    constructor(@Inject(TOASTR_TOKEN) private toastr: Toastr, private route: ActivatedRoute, private flightService:FlightService) {
     }
 
     ngOnInit() {
         //Uncomment this when you are not using routing for getting the flights from FlightListRouter
         //this.flightService.getFlights().subscribe(flights=> this.flights = flights);
-        this.flights = this.route.snapshot.data['flights'];
+        var json;
+        this.flights = this.flightService.getFlights();
+        //this.flights = (IFlight[])json;
     }
 
     handleBookRequest(flightName) {

@@ -1,18 +1,44 @@
 import {Injectable} from "@angular/core";
-import {Subject} from "rxjs/RX";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import {Http, Response} from "@angular/http"
+
 import {IFlight} from "./flight.module";
 import {Observable} from "rxjs/Observable";
+import "rxjs/add/observable/empty";
+import 'rxjs/Rx';
 
 @Injectable()
 export class FlightService {
 
-    getFlights():Observable<IFlight[]> {
-        let subject = new Subject<IFlight[]>()
-        setTimeout(()=> {subject.next(FLIGHTS); subject.complete();},100)
-        return subject;
+    constructor(private http:Http){
+    }
+
+    getFlights(){
+        this.http.get("http://localhost:8080/bookmyflights/flights").subscribe(data => {
+            // Read the result field from the JSON response.
+            //return data;
+            console.info(data)
+            return data.json();
+        });
+        /*var res = this.http
+            .get<String>('http://localhost:8080/bookmyflights/flights', {observe: 'response'})
+            .subscribe(resp => {
+                // Here, resp is of type HttpResponse<MyJsonData>.
+                // You can inspect its headers:
+                console.log(resp.headers.get('X-Custom-Header'));
+                // And access the body directly, which is typed as MyJsonData as requested.
+                console.log(resp.body);
+            });
+        /!*this.http.get('http://localhost:8080/bookmyflights/flights').subscribe(data => {
+            console.log(data);
+        });*!/
+        return '';*/
+    }
+
+    private handleError(error:Response){
+        return Observable.throw(error.statusText);
     }
 
     getFlight(id:number): IFlight{
