@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {Http, Response} from "@angular/http"
+import {Http, Response, Headers, RequestOptions} from "@angular/http"
 
 import {IFlight} from "./flight.module";
 import {Observable} from "rxjs/Observable";
@@ -15,40 +15,29 @@ export class FlightService {
     constructor(private http:Http){
     }
 
-    getFlights(){
-        this.http.get("http://localhost:8080/bookmyflights/flights").subscribe(data => {
-            // Read the result field from the JSON response.
-            //return data;
-            console.info(data)
-            return data.json();
-        });
-        /*var res = this.http
-            .get<String>('http://localhost:8080/bookmyflights/flights', {observe: 'response'})
-            .subscribe(resp => {
-                // Here, resp is of type HttpResponse<MyJsonData>.
-                // You can inspect its headers:
-                console.log(resp.headers.get('X-Custom-Header'));
-                // And access the body directly, which is typed as MyJsonData as requested.
-                console.log(resp.body);
-            });
-        /!*this.http.get('http://localhost:8080/bookmyflights/flights').subscribe(data => {
-            console.log(data);
-        });*!/
-        return '';*/
+    getFlights():Observable<IFlight[]>{
+        return this.http.get("http://localhost:8080/bookmyflights/flights").map((response:Response)=>{
+            return <IFlight[]>response.json();
+        }).catch(this.handleError)
     }
 
     private handleError(error:Response){
         return Observable.throw(error.statusText);
     }
 
-    getFlight(id:number): IFlight{
-        return FLIGHTS.filter(flight => flight.id === id).pop();
-        //return new IFlight();
+    getFlight(id:number): Observable<IFlight>{
+        return this.http.get("http://localhost:8080/bookmyflights/flights/" + id).map((response:Response)=>{
+            return <IFlight>response.json();
+        }).catch(this.handleError)
     }
 
-    saveFlight(flight: IFlight) {
-        flight.id=999
-        FLIGHTS.push(flight)
+    saveFlight(flight: IFlight):Observable<IFlight> {
+        let headers = new Headers({'content-type':'application/json'})
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.post('http://localhost:8080/bookmyflights/flights', JSON.stringify(flight), options).map((response:Response)=>{
+            return response.json();
+        }).catch(this.handleError);
     }
 }
 

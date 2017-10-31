@@ -16,6 +16,7 @@ export class FlightDetailsComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.flight = this.flightService.getFlight(+this.route.snapshot.params['id'])
+        this.flight = this.route.snapshot.data['flight']
+        //this.flight = this.flightService.getFlight(+this.route.snapshot.params['id'])
     }
 }

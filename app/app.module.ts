@@ -12,9 +12,11 @@ import{
     FlightService,
     CreateFlightComponent,
     FlightListResolver,
+    FlightResolver,
     FlightDetailsComponent,
     FlightRouteActivator,
 } from './flights/index';
+import {QuestionComponent, QuestionService} from './questions/index'
 import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CreateSessionComponent} from "./flights/flight-details/create-session.component";
@@ -28,12 +30,14 @@ declare let toastr: Toastr;
         enableTracing: false,
         useHash: true
     })],
-    declarations: [NavBarComponent, FlightsAppComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent, PageNotFoundComponent, CreateSessionComponent, BaseWishComponent],
+    declarations: [NavBarComponent, FlightsAppComponent, QuestionComponent, FlightsListComponent, FlightThumbnailComponent, FlightDetailsComponent, RouteComponent, CreateFlightComponent, PageNotFoundComponent, CreateSessionComponent, BaseWishComponent],
     providers: [FlightService,
         {provide: TOASTR_TOKEN, useValue: toastr},
         FlightRouteActivator,
         FlightsListComponent,
         FlightListResolver,
+        FlightResolver,
+        QuestionService,
         AuthService,
         {
             provide: 'canDeactivateCreateFlight',

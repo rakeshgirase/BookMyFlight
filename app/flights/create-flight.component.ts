@@ -42,9 +42,10 @@ export class CreateFlightComponent implements OnInit {
     }
 
     saveFlight(formValues) {
-        this.flightService.saveFlight(formValues);
-        this.isDirty = false;
-        this.router.navigate(['/flights']);
+        this.flightService.saveFlight(formValues).subscribe((flight:IFlight)=>{
+            this.isDirty = false;
+            this.router.navigate(['/flights']);
+        });
     }
 
     cancel() {

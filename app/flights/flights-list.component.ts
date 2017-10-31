@@ -22,15 +22,14 @@ import {FlightService} from "./shared/flight.service";
 })
 export class FlightsListComponent implements OnInit{
     flights: IFlight[]
+
     constructor(@Inject(TOASTR_TOKEN) private toastr: Toastr, private route: ActivatedRoute, private flightService:FlightService) {
     }
 
     ngOnInit() {
         //Uncomment this when you are not using routing for getting the flights from FlightListRouter
         //this.flightService.getFlights().subscribe(flights=> this.flights = flights);
-        var json;
-        this.flights = this.flightService.getFlights();
-        //this.flights = (IFlight[])json;
+        this.flights = this.route.snapshot.data['flights'];
     }
 
     handleBookRequest(flightName) {
