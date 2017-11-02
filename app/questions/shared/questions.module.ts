@@ -4,7 +4,9 @@
 export interface Question{
     id:number,
     question:string,
-    options:Options
+    options:Options,
+    previous:Question,
+    next:Question
 }
 
 export interface Options{

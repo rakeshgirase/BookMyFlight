@@ -22,7 +22,7 @@ export const appRoutes: Routes = [
     {path: 'flights/:id', component: FlightDetailsComponent, resolve: {flight: FlightResolver}},
     {path: 'flights/session/new', component: CreateSessionComponent},
     {path: '404', component: PageNotFoundComponent},
-    {path: '', redirectTo: 'flights', pathMatch: 'full'},
+    {path: '', redirectTo: 'question', pathMatch: 'full'},
     {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
     {path: 'wishes', component: BaseWishComponent},
     {path: 'question', component: QuestionComponent}

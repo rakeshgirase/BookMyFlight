@@ -4,25 +4,9 @@ import {QuestionService} from "./shared/question.service";
 import {Question} from "./shared/questions.module";
 
 @Component({
-    template: `
-        <div>
-            <h1>
-            Question:
-            </h1>
-            <hr/>
-        <div class="row">
-                <label>{{que.question}}</label>
-                <label>{{que.options}}</label>
-            <!--<div class="col-md-5" *ngFor="let option of question.options">
-                <label>{{option}}</label>
-            </div>-->
-            <button class="btn btn-primary" (click)="previous()">Previous</button>
-            <button class="btn btn-primary" (click)="next()">Next</button>
-        </div>
-        </div>
-    `
+    templateUrl: 'app/questions/question.html'
 })
-export class QuestionComponent implements OnInit{
+export class QuestionComponent implements OnInit {
     que: Question
 
     constructor(private questionService: QuestionService) {
@@ -32,11 +16,25 @@ export class QuestionComponent implements OnInit{
         this.next();
     }
 
-    previous(){
-        this.next()
+    previous() {
+        if (this.que.previous) {
+            this.que = this.que.previous;
+        }
     }
 
-    next(){
-        this.questionService.getNextQuestion().subscribe(question=>this.que = question);
+    next() {
+        if (!(this.que && this.que.next)) {
+            this.questionService.getNextQuestion().subscribe(question => {
+                if (this.que) {
+                    this.que.next = question;
+                    question.previous = this.que;
+                    this.que = this.que.next;
+                } else {
+                    this.que = question;
+                }
+            });
+        } else {
+            this.que = this.que.next;
+        }
     }
 }

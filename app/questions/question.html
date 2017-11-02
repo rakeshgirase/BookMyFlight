@@ -1,0 +1,24 @@
+<div>
+    <h1>
+        Question:
+    </h1>
+    <hr/>
+    <div class="row">
+        <div>
+            <button class="btn btn-primary" (click)="previous()" [disabled]="!que?.previous">Previous</button>
+            <button class="btn btn-primary" (click)="next()">Next</button>
+        </div>
+        <label><pre>{{que?.question}}</pre></label>
+        <div *ngFor="let option of que?.options?.options">
+            <input type="radio" name="radiogroup"
+                   [value]="option.tag"
+                   (change)="onSelectionChange(option)">
+            <label><pre>{{option.description}}</pre></label>
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-primary" (click)="previous()" [disabled]="!que?.previous">Previous</button>
+            <button class="btn btn-primary" (click)="next()">Next</button>
+        </div>
+    </div>
+</div>
