@@ -21,12 +21,12 @@ import {AuthService} from "./user/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CreateSessionComponent} from "./flights/flight-details/create-session.component";
 import {BaseWishComponent} from "./wishes/base-wish.component";
-import {HttpModule} from "@angular/http";
+import {HttpClientModule} from '@angular/common/http';
 
 declare let toastr: Toastr;
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, RouterModule.forRoot(appRoutes, {
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(appRoutes, {
         enableTracing: false,
         useHash: true
     })],

@@ -2,7 +2,8 @@ import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {Http, Response, Headers, RequestOptions} from "@angular/http"
+import {Response, Headers, RequestOptions} from "@angular/http"
+import {HttpClient} from "@angular/common/http"
 
 import {IFlight} from "./flight.module";
 import {Observable} from "rxjs/Observable";
@@ -12,7 +13,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class FlightService {
 
-    constructor(private http:Http){
+    constructor(private http:HttpClient){
     }
 
     getFlights():Observable<IFlight[]>{
@@ -35,7 +36,7 @@ export class FlightService {
         let headers = new Headers({'content-type':'application/json'})
         let options = new RequestOptions({headers: headers});
 
-        return this.http.post('http://localhost:8080/bookmyflights/flights', JSON.stringify(flight), options).map((response:Response)=>{
+        return this.http.post<any>('http://localhost:8080/bookmyflights/flights', flight).map((response:Response)=>{
             return response.json();
         }).catch(this.handleError);
     }
