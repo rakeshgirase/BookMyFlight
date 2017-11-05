@@ -6,7 +6,8 @@ export interface Question{
     question:string,
     options:Options,
     previous:Question,
-    next:Question
+    next:Question,
+    selectedOption:Option
 }
 
 export interface Options{

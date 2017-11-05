@@ -37,4 +37,8 @@ export class QuestionComponent implements OnInit {
             this.que = this.que.next;
         }
     }
+
+    onSelectionChange(option){
+        this.que.selectedOption = option;
+    }
 }
