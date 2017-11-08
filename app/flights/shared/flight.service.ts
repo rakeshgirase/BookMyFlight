@@ -17,9 +17,9 @@ export class FlightService {
     }
 
     getFlights():Observable<IFlight[]>{
-        return this.http.get("http://localhost:8080/bookmyflights/flights").map((response:Response)=>{
-            return <IFlight[]>response.json();
-        }).catch(this.handleError)
+        return this.http.get<IFlight[]>("http://localhost:8080/bookmyflights/flights").map((response)=>{
+            return response;
+        })
     }
 
     private handleError(error:Response){
@@ -27,18 +27,18 @@ export class FlightService {
     }
 
     getFlight(id:number): Observable<IFlight>{
-        return this.http.get("http://localhost:8080/bookmyflights/flights/" + id).map((response:Response)=>{
-            return <IFlight>response.json();
-        }).catch(this.handleError)
+        return this.http.get<IFlight>("http://localhost:8080/bookmyflights/flights/" + id).map((response)=>{
+            return response;
+        })
     }
 
     saveFlight(flight: IFlight):Observable<IFlight> {
         let headers = new Headers({'content-type':'application/json'})
         let options = new RequestOptions({headers: headers});
 
-        return this.http.post<any>('http://localhost:8080/bookmyflights/flights', flight).map((response:Response)=>{
-            return response.json();
-        }).catch(this.handleError);
+        return this.http.post<any>('http://localhost:8080/bookmyflights/flights', flight).map((response)=>{
+            return response;
+        });
     }
 }
 

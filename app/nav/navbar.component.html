@@ -29,7 +29,7 @@
                         <a *ngIf="!authService.isAuthenticated()" [routerLink]="['user/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Login</a>
                         <div *ngIf="authService.isAuthenticated()">
                             <a [routerLink]="['user/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Welcome {{authService.currentUser.firstName}}</a>
-                            <img [src]="authService.currentUser?.picUrl" [title]="authService.currentUser.firstName" class="profile-pic"/>
+                            <img [src]="authService?.currentUser?.picUrl" [title]="authService.currentUser.firstName" class="profile-pic"/>
                         </div>
                     </li>
                 </ul>

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Inject} from "@angular/core";
 import {AuthService} from "../user/auth.service";
 @Component({
     selector: 'nav-bar',
@@ -11,5 +11,7 @@ import {AuthService} from "../user/auth.service";
     `]
 })
 export class NavBarComponent{
-    constructor(private authService:AuthService){}
+    constructor(private authService:AuthService){
+        console.info('NavBar Constructor Invokde!!')
+    }
 }

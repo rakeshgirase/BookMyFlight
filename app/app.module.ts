@@ -1,27 +1,27 @@
+import {HttpClientModule} from "@angular/common/http";
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FlightsAppComponent} from "./flights-app.component";
 import {FlightThumbnailComponent} from "./flights/flight-thumbnail.component";
-import {NavBarComponent} from "./nav/navbar.component";
 import {Toastr, TOASTR_TOKEN} from "./common/toastr.service";
 import {Router, RouterModule, Routes} from "@angular/router";
 import {appRoutes, RouteComponent} from "./routes";
 import {PageNotFoundComponent} from "./errors/page-not-found.component";
-import{
-    FlightsListComponent,
-    FlightService,
+import {
     CreateFlightComponent,
+    FlightDetailsComponent,
     FlightListResolver,
     FlightResolver,
-    FlightDetailsComponent,
     FlightRouteActivator,
-} from './flights/index';
-import {QuestionComponent, QuestionService} from './questions/index'
-import {AuthService} from "./user/auth.service";
+    FlightService,
+    FlightsListComponent
+} from "./flights/index";
+import {QuestionComponent, QuestionService} from "./questions/index";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CreateSessionComponent} from "./flights/flight-details/create-session.component";
 import {BaseWishComponent} from "./wishes/base-wish.component";
-import {HttpClientModule} from '@angular/common/http';
+import {NavBarComponent} from "./nav/navbar.component";
+import {AuthService} from "./user/auth.service";
 
 declare let toastr: Toastr;
 
@@ -39,6 +39,12 @@ declare let toastr: Toastr;
         FlightResolver,
         QuestionService,
         AuthService,
+        /*{
+            provide: AuthService,
+            //useClass: AuthService,
+            useValue: AuthService,
+            depends: HttpClientModule
+        },*/
         {
             provide: 'canDeactivateCreateFlight',
             useValue: checkDirtyState

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Inject} from "@angular/core";
 import {Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {GoogleAuthComponent} from "./google-auth.component";
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit{
         });
     }
 
-    constructor(private authService:AuthService, private router:Router, private googleAuth:GoogleAuthComponent){
+    constructor(@Inject(AuthService) private authService:AuthService, private router:Router, private googleAuth:GoogleAuthComponent){
 
     }
     login(formValues){
